@@ -3,10 +3,10 @@
   api.getEvents(data, (err, data) => {
     if (err) {
       client.res.statusCode = 403;
-      callback(err);
+      callback(err.message);
       return;
     }
 
-    callback(null, data);
+    callback(data);
   });
 }

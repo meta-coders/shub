@@ -26,7 +26,7 @@ api.getSchedule = function(data, callback) {
       }
 
       api.getTimetable((timetable) => {
-        callback({ schedule, timetable });
+        callback(null, { schedule, timetable });
       });
     });
   });

@@ -23,7 +23,7 @@ api.getEvents = function(data, callback) {
         return;
       }
 
-      callback(result);
+      callback(null, result);
     });
   });
 };
