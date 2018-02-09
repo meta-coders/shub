@@ -1,0 +1,300 @@
+-- MySQL dump 10.15  Distrib 10.0.33-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: shub
+-- ------------------------------------------------------
+-- Server version	10.0.33-MariaDB-0ubuntu0.16.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `classes`
+--
+
+DROP TABLE IF EXISTS `classes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `classes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `classes`
+--
+
+LOCK TABLES `classes` WRITE;
+/*!40000 ALTER TABLE `classes` DISABLE KEYS */;
+INSERT INTO `classes` VALUES (1,'11-А'),(55,'11-Б'),(56,'11-В'),(57,'undefined');
+/*!40000 ALTER TABLE `classes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `events`
+--
+
+DROP TABLE IF EXISTS `events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `description` text NOT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `class_id` (`class_id`),
+  CONSTRAINT `events_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `events`
+--
+
+LOCK TABLES `events` WRITE;
+/*!40000 ALTER TABLE `events` DISABLE KEYS */;
+INSERT INTO `events` VALUES (1,'2018-02-25','et ultrices posuere cubilia curae',1),(2,'2018-02-21','diam vitae quam',1),(3,'2018-02-07','phasellus in',1),(4,'2018-02-09','pretium iaculis',1),(5,'2018-02-25','bibendum morbi non quam',1),(6,'2018-02-18','velit donec diam',1),(7,'2018-02-25','ac lobortis vel',1),(8,'2018-02-17','montes nascetur',1),(9,'2018-02-26','erat quisque erat',1),(10,'2018-02-02','in quis justo maecenas',1),(11,'2018-03-04','luctus ultricies',1);
+/*!40000 ALTER TABLE `events` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `homework`
+--
+
+DROP TABLE IF EXISTS `homework`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `homework` (
+  `id` int(11) NOT NULL,
+  `lesson_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lesson_id` (`lesson_id`),
+  KEY `class_id` (`class_id`),
+  CONSTRAINT `homework_ibfk_1` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`),
+  CONSTRAINT `homework_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `homework`
+--
+
+LOCK TABLES `homework` WRITE;
+/*!40000 ALTER TABLE `homework` DISABLE KEYS */;
+INSERT INTO `homework` VALUES (1,1,1,'lorem integer tincidunt ante'),(2,4,1,'auctor sed tristique in tempus'),(3,7,1,'proin interdum mauris'),(4,10,1,'non pretium quis'),(5,13,1,'id lobortis'),(6,16,1,'quis orci nullam'),(7,19,1,'sollicitudin mi'),(8,22,1,'at velit eu est congue'),(9,25,1,'est quam pharetra magna'),(10,28,1,'lobortis ligula');
+/*!40000 ALTER TABLE `homework` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `lessons`
+--
+
+DROP TABLE IF EXISTS `lessons`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lessons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `schedule_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `schedule_id` (`schedule_id`),
+  CONSTRAINT `lessons_ibfk_1` FOREIGN KEY (`schedule_id`) REFERENCES `schedule` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lessons`
+--
+
+LOCK TABLES `lessons` WRITE;
+/*!40000 ALTER TABLE `lessons` DISABLE KEYS */;
+INSERT INTO `lessons` VALUES (1,1,'2018-02-08','lesson'),(2,2,'2018-02-05','lesson'),(3,3,'2018-02-06','exam'),(4,4,'2018-02-07','exam'),(5,5,'2018-02-09','exam'),(6,6,'2018-02-07','exam'),(7,7,'2018-02-06','lesson'),(8,8,'2018-02-09','exam'),(9,9,'2018-02-07','exam'),(10,10,'2018-02-06','exam'),(11,11,'2018-02-08','exam'),(12,12,'2018-02-05','lesson'),(13,13,'2018-02-07','exam'),(14,14,'2018-02-06','lesson'),(15,15,'2018-02-08','lesson'),(16,16,'2018-02-07','lesson'),(17,17,'2018-02-07','lesson'),(18,18,'2018-02-06','lesson'),(19,19,'2018-02-06','exam'),(20,20,'2018-02-08','exam'),(21,21,'2018-02-07','lesson'),(22,22,'2018-02-05','lesson'),(23,23,'2018-02-06','exam'),(24,24,'2018-02-05','lesson'),(25,25,'2018-02-09','lesson'),(26,26,'2018-02-05','exam'),(27,27,'2018-02-07','exam'),(28,28,'2018-02-07','exam'),(29,29,'2018-02-08','lesson'),(30,30,'2018-02-09','lesson'),(31,31,'2018-02-05','exam'),(32,32,'2018-02-06','exam'),(33,33,'2018-02-09','lesson'),(34,34,'2018-02-07','exam'),(35,35,'2018-02-05','exam'),(36,36,'2018-02-09','exam'),(37,37,'2018-02-07','lesson'),(38,38,'2018-02-09','lesson'),(39,39,'2018-02-08','lesson'),(40,40,'2018-02-07','exam'),(41,41,'2018-02-07','lesson'),(42,42,'2018-02-06','lesson');
+/*!40000 ALTER TABLE `lessons` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `schedule`
+--
+
+DROP TABLE IF EXISTS `schedule`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schedule` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weekday` int(11) NOT NULL,
+  `lesson` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `cabinet` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `class_id` (`class_id`),
+  KEY `teacher_id` (`teacher_id`),
+  CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`),
+  CONSTRAINT `schedule_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `schedule`
+--
+
+LOCK TABLES `schedule` WRITE;
+/*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
+INSERT INTO `schedule` VALUES (1,1,1,1,'Математика',100,1),(2,1,2,1,'Англ. Мова',101,2),(3,1,3,1,'Укр. Мова',102,3),(4,1,4,1,'Інформатика',103,4),(5,1,5,1,'Економіка',104,5),(6,1,6,1,'Фізра',105,6),(7,1,7,1,'Історія',106,7),(8,2,1,1,'Математика',200,1),(9,2,2,1,'Англ. Мова',201,2),(10,2,3,1,'Укр. Мова',202,3),(11,2,4,1,'Інформатика',203,4),(12,2,5,1,'Економіка',204,5),(13,2,6,1,'Фізра',205,6),(14,2,7,1,'Історія',206,7),(15,3,1,1,'Математика',300,1),(16,3,2,1,'Англ. Мова',301,2),(17,3,3,1,'Укр. Мова',302,3),(18,3,4,1,'Інформатика',303,4),(19,3,5,1,'Економіка',304,5),(20,3,6,1,'Фізра',305,6),(21,3,7,1,'Історія',306,7),(22,4,1,1,'Математика',400,1),(23,4,2,1,'Англ. Мова',401,2),(24,4,3,1,'Укр. Мова',402,3),(25,4,4,1,'Інформатика',403,4),(26,4,5,1,'Економіка',404,5),(27,4,6,1,'Фізра',405,6),(28,4,7,1,'Історія',406,7),(29,5,1,1,'Математика',500,1),(30,5,2,1,'Англ. Мова',501,2),(31,5,3,1,'Укр. Мова',502,3),(32,5,4,1,'Інформатика',503,4),(33,5,5,1,'Економіка',504,5),(34,5,6,1,'Фізра',505,6),(35,5,7,1,'Історія',506,7),(36,6,1,1,'Математика',600,1),(37,6,2,1,'Англ. Мова',601,2),(38,6,3,1,'Укр. Мова',602,3),(39,6,4,1,'Інформатика',603,4),(40,6,5,1,'Економіка',604,5),(41,6,6,1,'Фізра',605,6),(42,6,7,1,'Історія',606,7),(127,1,1,57,'Математика',100,1),(128,1,2,57,'Англ. Мова',101,2),(129,1,3,57,'Укр. Мова',102,3),(130,1,4,57,'Інформатика',103,4),(131,1,5,57,'Економіка',104,5),(132,1,6,57,'Фізра',105,6),(133,1,7,57,'Історія',106,7),(134,2,1,57,'Математика',200,1),(135,2,2,57,'Англ. Мова',201,2),(136,2,3,57,'Укр. Мова',202,3),(137,2,4,57,'Інформатика',203,4),(138,2,5,57,'Економіка',204,5),(139,2,6,57,'Фізра',205,6),(140,2,7,57,'Історія',206,7),(141,3,1,57,'Математика',300,1),(142,3,2,57,'Англ. Мова',301,2),(143,3,3,57,'Укр. Мова',302,3),(144,3,4,57,'Інформатика',303,4),(145,3,5,57,'Економіка',304,5),(146,3,6,57,'Фізра',305,6),(147,3,7,57,'Історія',306,7),(148,4,1,57,'Математика',400,1),(149,4,2,57,'Англ. Мова',401,2),(150,4,3,57,'Укр. Мова',402,3),(151,4,4,57,'Інформатика',403,4),(152,4,5,57,'Економіка',404,5),(153,4,6,57,'Фізра',405,6),(154,4,7,57,'Історія',406,7),(155,5,1,57,'Математика',500,1),(156,5,2,57,'Англ. Мова',501,2),(157,5,3,57,'Укр. Мова',502,3),(158,5,4,57,'Інформатика',503,4),(159,5,5,57,'Економіка',504,5),(160,5,6,57,'Фізра',505,6),(161,5,7,57,'Історія',506,7),(162,6,1,57,'Математика',600,14),(163,6,2,57,'Англ. Мова',601,1),(164,6,3,57,'Укр. Мова',602,3),(165,6,4,57,'Інформатика',603,4),(166,6,5,57,'Економіка',604,5),(167,6,6,57,'Фізра',605,15),(168,6,7,57,'Історія',606,7);
+/*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sessions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `session_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+INSERT INTO `sessions` VALUES (3,1,'bd6898831509b0b3887d88083edfb9a3');
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `students`
+--
+
+DROP TABLE IF EXISTS `students`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `students` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `class_id` (`class_id`),
+  CONSTRAINT `students_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=438 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `students`
+--
+
+LOCK TABLES `students` WRITE;
+/*!40000 ALTER TABLE `students` DISABLE KEYS */;
+INSERT INTO `students` VALUES (1,'Ваня',1),(2,'Петя',1),(3,'Діма',1),(4,'Коля',1),(5,'Настя',1),(6,'Валера',1),(7,'Петровіч',1),(8,'Рома',1),(9,'Ілля',1),(10,'Костік',1),(11,'Максім',1),(12,'Валя',1),(13,'Валентін',1),(14,'Міша',1),(15,'Вова',1),(16,'Крістіна',1),(17,'Маша',1),(18,'Микита',1),(19,'Федя',1),(400,'Ваня',55),(401,'Петя',55),(402,'Діма',55),(403,'Коля',55),(404,'Настя',55),(405,'Валера',55),(406,'Петровіч',55),(407,'Рома',55),(408,'Ілля',55),(409,'Костік',55),(410,'Максім',55),(411,'Валя',55),(412,'Валентін',55),(413,'Міша',55),(414,'Вова',55),(415,'Крістіна',55),(416,'Маша',55),(417,'Микита',55),(418,'Федя',55),(419,'Ваня',56),(420,'Петя',56),(421,'Діма',56),(422,'Коля',56),(423,'Настя',56),(424,'Валера',56),(425,'Петровіч',56),(426,'Рома',56),(427,'Ілля',56),(428,'Костік',56),(429,'Максім',56),(430,'Валя',56),(431,'Валентін',56),(432,'Міша',56),(433,'Вова',56),(434,'Крістіна',56),(435,'Маша',56),(436,'Микита',56),(437,'Федя',56);
+/*!40000 ALTER TABLE `students` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `teachers`
+--
+
+DROP TABLE IF EXISTS `teachers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `teachers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `teachers`
+--
+
+LOCK TABLES `teachers` WRITE;
+/*!40000 ALTER TABLE `teachers` DISABLE KEYS */;
+INSERT INTO `teachers` VALUES (1,'Петровіч О.В.'),(2,'Генадівнічівна І.І.'),(3,'Довгополючка Р.Р.'),(4,'Кувічка М.Е.'),(5,'Мачехін М.М.'),(6,'Фізрук Е.Ю.'),(7,'Шевчук Х.Т.'),(14,'Перподперепрепод Щ.Ы.'),(15,'Петардовна Б.Л.');
+/*!40000 ALTER TABLE `teachers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `timetable`
+--
+
+DROP TABLE IF EXISTS `timetable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `timetable` (
+  `id` int(11) NOT NULL,
+  `start` time NOT NULL,
+  `end` time NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `timetable`
+--
+
+LOCK TABLES `timetable` WRITE;
+/*!40000 ALTER TABLE `timetable` DISABLE KEYS */;
+INSERT INTO `timetable` VALUES (1,'08:00:00','08:45:00'),(2,'08:55:00','09:40:00'),(3,'09:50:00','10:35:00'),(4,'10:55:00','11:40:00'),(5,'11:55:00','12:30:00'),(6,'12:45:00','13:30:00'),(7,'13:50:00','14:35:00'),(8,'14:45:00','15:30:00'),(9,'16:15:00','16:25:00'),(10,'16:45:00','17:30:00');
+/*!40000 ALTER TABLE `timetable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL,
+  `profile_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'dima','3b7f6ca1dd7d4a2f02bec407cb35d28b','students',3),(2,'front','8dedb8f8bab3f048fbb548fbdcc796c0','students',6),(111,'Петя','5e5545d38a68148a2d5bd5ec9a89e327','students',1),(112,'Діма','213ee683360d88249109c2f92789dbc3','students',2),(113,'Коля','8e4947690532bc44a8e41e9fb365b76a','students',3),(114,'Настя','166a50c910e390d922db4696e4c7747b','students',4),(115,'Валера','9fd9280a7aa3578c8e853745a5fcc18a','students',5),(116,'Петровіч','27e062bf3df59edebb5db9f89952c8b3','students',6),(117,'Рома','72e8744fc2faa17a83dec9bed06b8b65','students',7),(118,'Ілля','8aa7fb36a4efbbf019332b4677b528cf','students',8),(119,'Костік','7c8cd5da17441ff04bf445736964dd16','students',9),(120,'Максім','2c62e6068c765179e1aed9bc2bfd4689','students',10),(121,'Валя','9cf695ac37ef238e62f6ee874b4b3968','students',11),(122,'Валентін','7e941d9a3237b1770effdcb05a0aa2a5','students',12),(123,'Міша','b32d56347d79af0164e17f8b2b4ff4d0','students',13),(124,'Вова','165f0cca0654c0f643fc6f06ae91d353','students',14),(125,'Крістіна','1aab63425143cdbee13e839afc02849f','students',15),(126,'Маша','051bef2eaac7c580b990da8f79459263','students',16),(127,'Микита','717edde484efc01f99e58d67181717f9','students',17),(128,'Федя','4b8d3feaf05b8735fc91f0a3df478ccf','students',18),(129,'Петя','5e5545d38a68148a2d5bd5ec9a89e327','students',1),(130,'Діма','213ee683360d88249109c2f92789dbc3','students',2),(131,'Коля','8e4947690532bc44a8e41e9fb365b76a','students',3),(132,'Настя','166a50c910e390d922db4696e4c7747b','students',4),(133,'Валера','9fd9280a7aa3578c8e853745a5fcc18a','students',5),(134,'Петровіч','27e062bf3df59edebb5db9f89952c8b3','students',6),(135,'Рома','72e8744fc2faa17a83dec9bed06b8b65','students',7),(136,'Ілля','8aa7fb36a4efbbf019332b4677b528cf','students',8),(137,'Костік','7c8cd5da17441ff04bf445736964dd16','students',9),(138,'Максім','2c62e6068c765179e1aed9bc2bfd4689','students',10),(139,'Валя','9cf695ac37ef238e62f6ee874b4b3968','students',11),(140,'Валентін','7e941d9a3237b1770effdcb05a0aa2a5','students',12),(141,'Міша','b32d56347d79af0164e17f8b2b4ff4d0','students',13),(142,'Вова','165f0cca0654c0f643fc6f06ae91d353','students',14),(143,'Крістіна','1aab63425143cdbee13e839afc02849f','students',15),(144,'Маша','051bef2eaac7c580b990da8f79459263','students',16),(145,'Микита','717edde484efc01f99e58d67181717f9','students',17),(146,'Федя','4b8d3feaf05b8735fc91f0a3df478ccf','students',18);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-02-08 20:37:26

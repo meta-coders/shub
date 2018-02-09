@@ -1,3 +1,0 @@
-2018-02-08T09:13:22.873Z	Worker(5136/S1N1)	30005ms	1	-	-	-	443	224	GET	408	http://localhost/getSchedule.json	Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36	undefined
-2018-02-08T14:14:39.636Z	Worker(17550/S1N1)	30008ms	10.2.0.45	-	-	-	479	219	POST	408	http://localhost:3000/auth/signIn.json	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36	http://localhost:3000/login
-2018-02-08T14:14:44.560Z	Worker(17550/S1N1)	30007ms	10.2.0.45	-	-	-	479	219	POST	408	http://localhost:3000/auth/signIn.json	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36	http://localhost:3000/login

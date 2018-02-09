@@ -27,7 +27,7 @@ api.signIn = function(login, password, callback) {
     const options = {
       method: 'INSERT INTO',
       table: 'sessions',
-      insert: `(user_id, session_id) VALUES (${id}, "${sid}")`
+      insert: `VALUES (null, ${id}, "${sid}")`
     };
 
     if (result[0].password === pass) {

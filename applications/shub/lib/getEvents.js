@@ -1,11 +1,11 @@
 api.getEvents = function(data, callback) {
-  api.checkAvailability(data.sessionId, (err, result) => {
+  api.checkAvailability(data.sessionId, (err, classId) => {
     if (err) {
       application.log.error(err);
       return;
     }
 
-    if (!result[0]) {
+    if (!classId) {
       callback(new Error('Not authorized'));
       return;
     }
@@ -13,7 +13,7 @@ api.getEvents = function(data, callback) {
     const options = {
       query: '*',
       table: 'events',
-      search: `class_id=${data.classId}`,
+      search: `class_id=${classId}`,
       from: true
     };
 
@@ -23,7 +23,7 @@ api.getEvents = function(data, callback) {
         return;
       }
 
-      callback(result);
+      callback(null, result);
     });
   });
 };
