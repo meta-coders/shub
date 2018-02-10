@@ -1,13 +1,13 @@
--- MySQL dump 10.15  Distrib 10.0.33-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.2.12-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: shub
 -- ------------------------------------------------------
--- Server version	10.0.33-MariaDB-0ubuntu0.16.04.1
+-- Server version	10.2.12-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -37,6 +37,34 @@ LOCK TABLES `classes` WRITE;
 /*!40000 ALTER TABLE `classes` DISABLE KEYS */;
 INSERT INTO `classes` VALUES (1,'11-А'),(55,'11-Б'),(56,'11-В'),(57,'undefined');
 /*!40000 ALTER TABLE `classes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `done_homework`
+--
+
+DROP TABLE IF EXISTS `done_homework`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `done_homework` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `homework_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `homework_id` (`homework_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `done_homework_ibfk_1` FOREIGN KEY (`homework_id`) REFERENCES `homework` (`id`),
+  CONSTRAINT `done_homework_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `done_homework`
+--
+
+LOCK TABLES `done_homework` WRITE;
+/*!40000 ALTER TABLE `done_homework` DISABLE KEYS */;
+/*!40000 ALTER TABLE `done_homework` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -93,7 +121,7 @@ CREATE TABLE `homework` (
 
 LOCK TABLES `homework` WRITE;
 /*!40000 ALTER TABLE `homework` DISABLE KEYS */;
-INSERT INTO `homework` VALUES (1,1,1,'lorem integer tincidunt ante'),(2,4,1,'auctor sed tristique in tempus'),(3,7,1,'proin interdum mauris'),(4,10,1,'non pretium quis'),(5,13,1,'id lobortis'),(6,16,1,'quis orci nullam'),(7,19,1,'sollicitudin mi'),(8,22,1,'at velit eu est congue'),(9,25,1,'est quam pharetra magna'),(10,28,1,'lobortis ligula');
+INSERT INTO `homework` VALUES (1,1,1,'Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante.'),(2,5,1,'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.'),(3,9,1,'In congue. Etiam justo.'),(4,13,1,'Nulla tellus. In sagittis dui vel nisl.'),(5,17,1,'Quisque ut erat.'),(6,21,1,'In congue. Etiam justo.'),(7,25,1,'Aenean sit amet justo.'),(8,29,1,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus.'),(9,33,1,'Donec quis orci eget orci vehicula condimentum.'),(10,37,1,'Morbi vel lectus in quam fringilla rhoncus.');
 /*!40000 ALTER TABLE `homework` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +200,7 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +209,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES (3,1,'bd6898831509b0b3887d88083edfb9a3');
+INSERT INTO `sessions` VALUES (1,1,'d44e6dc56943fcf8f8feba16acfeb154'),(2,1,'d44e6dc56942fcf8f8feba16acfeb154'),(3,1,'305bbbad789f92602164c2517a75bf0a');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,4 +325,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-08 20:37:26
+-- Dump completed on 2018-02-10 17:10:50
