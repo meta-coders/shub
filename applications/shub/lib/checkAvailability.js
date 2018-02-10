@@ -21,6 +21,7 @@ api.checkAvailability = function(sessionId, callback) {
       from: true
     };
 
-    this.db.mysql.query(options, (err, result) => callback(err, result[0].class_id));
+    this.db.mysql.query(options, (err, result) =>
+      callback(err, result[0].class_id));
   });
 };
