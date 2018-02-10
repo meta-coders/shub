@@ -15,7 +15,7 @@ api.getSchedule = function(data, callback) {
       query: 'schedule.weekday, schedule.lesson, schedule.subject,' +
       ' schedule.cabinet, teachers.name AS teacher_name',
       join: 'LEFT JOIN teachers ON teachers.id=schedule.teacher_id',
-      search: `class_id=${classId}`,
+      search: `class_id = ${classId}`,
       from: true
     };
 
