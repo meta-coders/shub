@@ -13,7 +13,8 @@ api.getEvents = function(data, callback) {
     const options = {
       query: '*',
       table: 'events',
-      search: `class_id=${classId}`,
+      search: 'YEAR(date) = YEAR(CURRENT_DATE()) AND ' +
+        `MONTH(date) = MONTH(CURRENT_DATE()) AND class_id = ${classId}`,
       from: true
     };
 
@@ -23,7 +24,15 @@ api.getEvents = function(data, callback) {
         return;
       }
 
-      callback(null, result);
+      const events = result.map(item => (
+        Object.assign(
+          {},
+          item,
+          { date: item.date.toISOString().split('T')[0] }
+        )
+      ));
+
+      callback(null, events);
     });
   });
 };

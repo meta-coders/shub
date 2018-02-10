@@ -6,7 +6,7 @@ api.signIn = function(login, password, callback) {
   const options = {
     query: 'id, password, role',
     table: 'users',
-    search: `login="${login}"`,
+    search: `login = "${login}"`,
     from: true
   };
 

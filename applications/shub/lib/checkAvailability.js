@@ -2,7 +2,7 @@ api.checkAvailability = function(sessionId, callback) {
   const options = {
     query: '*',
     table: 'sessions',
-    search: `session_id="${sessionId}"`,
+    search: `session_id = "${sessionId}"`,
     from: true
   };
 
@@ -17,7 +17,7 @@ api.checkAvailability = function(sessionId, callback) {
     const options = {
       query: '*',
       table: 'students',
-      search: `id=(select profile_id from users where id=${uid})`,
+      search: `id = (select profile_id from users where id = ${uid})`,
       from: true
     };
 

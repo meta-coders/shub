@@ -2,7 +2,7 @@ api.signOut = function(sessionId, callback) {
   const options = {
     method: 'DELETE',
     table: 'sessions',
-    search: `session_id="${sessionId}"`,
+    search: `session_id = "${sessionId}"`,
     from: true
   };
 
