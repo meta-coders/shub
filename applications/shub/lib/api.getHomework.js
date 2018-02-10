@@ -10,11 +10,14 @@ api.getHomework = function(homeworkId, sessionId, callback) {
       return;
     }
 
+    const method = (homeworkId) ? 'INSERT INTO' : 'SELECT';
+    const insert = (homeworkId) ? `VALUES (null, ${homeworkId}, (select ` +
+      `user_id from sessions where session_id = '${sessionId}'))` : null;
+
     const options = {
-      method: 'INSERT INTO',
+      method,
       table: 'done_homework',
-      insert: `VALUES (null, ${homeworkId}, (select user_id ` +
-        `from sessions where session_id = '${sessionId}'))`
+      insert
     };
 
     api.db.mysql.query(options, (err) => {
