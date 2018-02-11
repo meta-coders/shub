@@ -14,12 +14,14 @@ api.getHomework = function(homeworkId, sessionId, callback) {
     const query = (homeworkId) ? null : '*';
     const insert = (homeworkId) ? `VALUES (null, ${homeworkId}, (select ` +
       `user_id from sessions where session_id = '${sessionId}'))` : null;
+    const from = (homeworkId) ? null : true;
 
     const options = {
       method,
       query,
       table: 'done_homework',
-      insert
+      insert,
+      from
     };
 
     api.db.mysql.query(options, (err) => {
@@ -30,9 +32,11 @@ api.getHomework = function(homeworkId, sessionId, callback) {
 
       const options = {
         table: 'homework',
-        query: 'homework.id, homework.description, lessons.date AS date',
-        join: 'LEFT JOIN lessons ON lessons.id = homework.lesson_id',
-        search: `class_id = ${classId}`,
+        query: 'homework.id, homework.description, lessons.date AS date,' +
+          ' schedule.subject AS subject',
+        join: 'LEFT JOIN lessons ON lessons.id = homework.lesson_id ' +
+          'LEFT JOIN schedule ON lessons.schedule_id = schedule.id',
+        search: `homework.class_id = ${classId}`,
         from: true
       };
 
