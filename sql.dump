@@ -169,7 +169,7 @@ CREATE TABLE `pinned_messages` (
   PRIMARY KEY (`id`),
   KEY `class_id` (`class_id`),
   CONSTRAINT `pinned_messages_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +178,7 @@ CREATE TABLE `pinned_messages` (
 
 LOCK TABLES `pinned_messages` WRITE;
 /*!40000 ALTER TABLE `pinned_messages` DISABLE KEYS */;
-INSERT INTO `pinned_messages` VALUES (1,'Контрольна робота з української мови.','2018-02-14',1);
+INSERT INTO `pinned_messages` VALUES (1,'Контрольна робота з української мови.','2018-02-14',1),(2,'Контрольна робота з фізики.','2018-02-14',1);
 /*!40000 ALTER TABLE `pinned_messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,7 +229,7 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +238,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES (8,1,'0104642a72f72d14c1dd36b14ddb4b1b'),(20,1,'20293513b5acdeb0ccfffe48e3bc958a'),(27,1,'9563d1216744158fea7c978bc2a96940');
+INSERT INTO `sessions` VALUES (8,1,'0104642a72f72d14c1dd36b14ddb4b1b'),(20,1,'20293513b5acdeb0ccfffe48e3bc958a'),(27,1,'9563d1216744158fea7c978bc2a96940'),(28,1,'2ec4b081da9cee700f826c9ef4ba9b77'),(29,1,'fdaa3e326e2ad42d2b7966cd240a7c5c');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,4 +354,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-11 17:42:04
+-- Dump completed on 2018-02-11 17:59:17
