@@ -2,14 +2,27 @@
   const data = JSON.parse(client.data);
   const homeworkId = data.homeworkId;
   const sessionId = data.sessionId;
+  const done = data.done;
 
-  api.getHomework(homeworkId, sessionId, (err, data) => {
-    if (err) {
-      client.res.statusCode = 403;
-      callback(err.message);
-      return;
-    }
+  if (done) {
+    api.doneHomework(homeworkId, sessionId, (err, data) => {
+      if (err) {
+        client.res.statusCode = 403;
+        callback(err.message);
+        return;
+      }
 
-    callback(data);
-  });
+      callback(data);
+    });
+  } else {
+    api.undoneHomework(homeworkId, sessionId, (err, data) => {
+      if (err) {
+        client.res.statusCode = 403;
+        callback(err.message);
+        return;
+      }
+
+      callback(data);
+    });
+  }
 }
