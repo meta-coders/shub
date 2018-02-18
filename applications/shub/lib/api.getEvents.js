@@ -11,11 +11,10 @@ api.getEvents = function(data, callback) {
     }
 
     const options = {
-      query: '*',
+      method: 'select',
       table: 'events',
-      search: 'YEAR(date) = YEAR(CURRENT_DATE()) AND ' +
-        `MONTH(date) = MONTH(CURRENT_DATE()) AND class_id = ${classId}`,
-      from: true
+      filter: 'YEAR(date) = YEAR(CURRENT_DATE()) AND ' +
+        `MONTH(date) = MONTH(CURRENT_DATE()) AND class_id = ${classId}`
     };
 
     this.db.mysql.query(options, (err, result) => {

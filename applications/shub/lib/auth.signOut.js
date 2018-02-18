@@ -1,9 +1,8 @@
 api.signOut = function(sessionId, callback) {
   const options = {
-    method: 'DELETE',
+    method: 'delete',
     table: 'sessions',
-    search: `session_id = "${sessionId}"`,
-    from: true
+    filter: `session_id = "${sessionId}"`
   };
 
   this.db.mysql.query(options, (err, result) => {

@@ -4,10 +4,10 @@ api.signIn = function(login, password, callback) {
     .digest('hex');
 
   const options = {
-    query: 'id, password, role',
+    method: 'select',
+    columns: ['id', 'password', 'role'],
     table: 'users',
-    search: `login = "${login}"`,
-    from: true
+    filter: `login = "${login}"`
   };
 
   this.db.mysql.query(options, (err, result) => {
@@ -25,9 +25,9 @@ api.signIn = function(login, password, callback) {
       .digest('hex');
 
     const options = {
-      method: 'INSERT INTO',
+      method: 'insert into',
       table: 'sessions',
-      insert: `VALUES (null, ${id}, "${sid}")`
+      values: [null, id, `"${sid}"`]
     };
 
     if (result[0].password === pass) {

@@ -11,10 +11,10 @@ api.getPinnedMessages = function(sessionId, callback) {
     }
 
     const options = {
+      method: 'select',
       table: 'pinned_messages',
-      query: 'message, date',
-      search: `class_id = ${classId}`,
-      from: true
+      columns: ['message', 'date'],
+      filter: `class_id = ${classId}`
     };
 
     api.db.mysql.query(options, (err, result) => {
