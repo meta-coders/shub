@@ -10,16 +10,11 @@ api.undoneHomework = function(homeworkId, sessionId, callback) {
       return;
     }
 
-    const method = (homeworkId) ? 'DELETE' : 'SELECT';
-    const query = (homeworkId) ? null : '*';
-    const search = (homeworkId) ? `homework_id = ${homeworkId}` : null;
-
     const options = {
-      method,
-      query,
+      method: (homeworkId) ? 'DELETE' : 'SELECT',
+      columns: (homeworkId) ? null : ['*'],
       table: 'done_homework',
-      search,
-      from: true
+      filter: (homeworkId) ? `homework_id = ${homeworkId}` : null
     };
 
     api.db.mysql.query(options, (err) => {

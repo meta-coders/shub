@@ -11,13 +11,19 @@ api.getSchedule = function(data, callback) {
     }
 
     const options = {
+      method: 'select',
       table: 'schedule',
-      query: 'schedule.weekday, schedule.lesson, schedule.subject,' +
-      ' schedule.cabinet, teachers.name AS teacher_name',
+      columns: [
+        'schedule.weekday',
+        'schedule.lesson',
+        'schedule.subject',
+        'schedule.cabinet',
+        'teachers.name AS teacher_name'
+      ],
       join: 'LEFT JOIN teachers ON teachers.id=schedule.teacher_id',
-      search: `class_id = ${classId}`,
-      from: true
+      filter: `class_id = ${classId}`
     };
+
 
     api.db.mysql.query(options, (err, schedule) => {
       if (err) {

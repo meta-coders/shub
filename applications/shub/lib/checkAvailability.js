@@ -1,9 +1,8 @@
 api.checkAvailability = function(sessionId, callback) {
   const options = {
-    query: '*',
+    method: 'select',
     table: 'sessions',
-    search: `session_id = "${sessionId}"`,
-    from: true
+    filter: `session_id = "${sessionId}"`
   };
 
   this.db.mysql.query(options, (err, result) => {
@@ -15,10 +14,9 @@ api.checkAvailability = function(sessionId, callback) {
     const uid = result[0].user_id;
 
     const options = {
-      query: '*',
+      method: 'select',
       table: 'students',
-      search: `id = (select profile_id from users where id = ${uid})`,
-      from: true
+      filter: `id = (select profile_id from users where id = ${uid})`
     };
 
     this.db.mysql.query(options, (err, result) =>

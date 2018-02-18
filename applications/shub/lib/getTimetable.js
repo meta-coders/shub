@@ -3,9 +3,9 @@ api.getTimetable = function(callback) {
   const end = 'TIME_FORMAT(end, "%H:%i") AS end';
 
   const options = {
-    query: `id, ${start}, ${end}`,
+    method: 'select',
+    columns: ['id', start, end],
     table: 'timetable',
-    from: true
   };
 
   api.db.mysql.query(options, (err, result) => {

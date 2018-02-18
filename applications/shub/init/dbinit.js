@@ -1,13 +1,13 @@
 api.db.mysql = {
   connection: api.mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'shub'
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'shub'
   })
 };
 
-api.db.mysql.connection.connect(function(err) {
+api.db.mysql.connection.connect((err) => {
   if (err) {
     application.log.error(err);
     return;

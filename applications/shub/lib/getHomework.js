@@ -1,12 +1,16 @@
 api.getHomework = function(classId, sessionId, callback) {
   const options = {
+    method: 'select',
     table: 'homework',
-    query: 'homework.id, homework.description, lessons.date AS date,' +
-      ' schedule.subject AS subject',
-    join: 'LEFT JOIN lessons ON lessons.id = homework.lesson_id ' +
-      'LEFT JOIN schedule ON lessons.schedule_id = schedule.id',
-    search: `homework.class_id = ${classId}`,
-    from: true
+    columns: [
+      'homework.id',
+      'homework.description',
+      'lessons.date AS date',
+      'schedule.subject AS subject'
+    ],
+    join: 'left join lessons ON lessons.id = homework.lesson_id ' +
+      'left join schedule ON lessons.schedule_id = schedule.id',
+    filter: `homework.class_id = ${classId}`,
   };
 
   api.db.mysql.query(options, (err, result) => {
@@ -24,11 +28,10 @@ api.getHomework = function(classId, sessionId, callback) {
     ));
 
     const options = {
+      method: 'select',
       table: 'done_homework',
-      query: '*',
-      search: 'user_id = ' +
-      `(select user_id from sessions where session_id = '${sessionId}')`,
-      from: true
+      filter: 'user_id = ' +
+      `(select user_id from sessions where session_id = "${sessionId}")`,
     };
 
     api.db.mysql.query(options, (err, result) => {
