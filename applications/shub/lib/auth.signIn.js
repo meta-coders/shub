@@ -16,21 +16,28 @@ api.signIn = function(login, password, callback) {
       return;
     }
 
-    const id = result[0].id;
-    const role = result[0].role;
+    const user = result[0];
 
-    const salt = `${new Date().getTime()}`;
-    const sid = api.crypto.createHmac('md5', salt)
-      .update(`${id}`)
-      .digest('hex');
+    if (!user) {
+      callback('Not signed up');
+      return;
+    }
 
-    const options = {
-      method: 'insert into',
-      table: 'sessions',
-      values: [null, id, `"${sid}"`]
-    };
+    if (user.password === pass) {
+      const id = user.id;
+      const role = user.role;
 
-    if (result[0].password === pass) {
+      const salt = `${new Date().getTime()}`;
+      const sid = api.crypto.createHmac('md5', salt)
+        .update(`${id}`)
+        .digest('hex');
+
+      const options = {
+        method: 'insert into',
+        table: 'sessions',
+        values: [null, id, `"${sid}"`]
+      };
+
       this.db.mysql.query(options, (err) => {
         if (err) {
           application.log.error(err);
@@ -40,7 +47,7 @@ api.signIn = function(login, password, callback) {
         callback(null, { sessionId: sid, role });
       });
     } else {
-      callback(new Error('Not authotized'));
+      callback('Not authotized');
     }
   });
 };

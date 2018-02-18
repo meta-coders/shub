@@ -5,11 +5,11 @@ api.getHomework = function(classId, sessionId, callback) {
     columns: [
       'homework.id',
       'homework.description',
-      'lessons.date AS date',
-      'schedule.subject AS subject'
+      'lessons.date as date',
+      'schedule.subject as subject'
     ],
-    join: 'left join lessons ON lessons.id = homework.lesson_id ' +
-      'left join schedule ON lessons.schedule_id = schedule.id',
+    join: 'left join lessons on homework.lesson_id = lessons.id ' +
+      'left join schedule on lessons.schedule_id = schedule.id ',
     filter: `homework.class_id = ${classId}`,
   };
 
@@ -21,9 +21,11 @@ api.getHomework = function(classId, sessionId, callback) {
 
     const homework = result.map(item => (
       Object.assign(
-        { done: false },
-        item,
-        { date: item.date.toISOString().split('T')[0] }
+        {
+          done: false,
+          date: item.date.toISOString().split('T')[0]
+        },
+        item
       )
     ));
 
@@ -41,11 +43,8 @@ api.getHomework = function(classId, sessionId, callback) {
       }
 
       homework.forEach((item) => {
-        for (const i in result) {
-          if (!item.done && item.id === result[i].homework_id) {
-            item.done = true;
-          }
-        }
+        const has = result.some(el => el.homework_id === item.id);
+        if (has) item.done = true;
       });
 
       callback(null, homework);

@@ -6,7 +6,7 @@ api.checkAvailability = function(sessionId, callback) {
   };
 
   this.db.mysql.query(options, (err, result) => {
-    if (!result[0]) {
+    if (err || !result[0]) {
       callback(err);
       return;
     }

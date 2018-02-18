@@ -11,7 +11,7 @@
   api.signIn(login, password, (err, result) => {
     if (err) {
       client.res.statusCode = 403;
-      callback(err.message);
+      callback(err);
       return;
     }
 

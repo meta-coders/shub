@@ -1,12 +1,12 @@
-api.getEvents = function(data, callback) {
-  api.checkAvailability(data.sessionId, (err, classId) => {
+api.getEvents = function(sessionId, callback) {
+  api.checkAvailability(sessionId, (err, classId) => {
     if (err) {
       application.log.error(err);
       return;
     }
 
     if (!classId) {
-      callback(new Error('Not authorized'));
+      callback('Not authorized');
       return;
     }
 
@@ -25,9 +25,8 @@ api.getEvents = function(data, callback) {
 
       const events = result.map(item => (
         Object.assign(
-          {},
-          item,
-          { date: item.date.toISOString().split('T')[0] }
+          { date: item.date.toISOString().split('T')[0] },
+          item
         )
       ));
 

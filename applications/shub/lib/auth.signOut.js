@@ -11,7 +11,7 @@ api.signOut = function(sessionId, callback) {
       return;
     }
 
-    if (result.affectedRows === 0) callback(new Error('Wrong session'));
+    if (result.affectedRows === 0) callback('Wrong session');
     else callback();
   });
 };

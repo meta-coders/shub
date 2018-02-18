@@ -5,7 +5,7 @@
   api.signOut(sessionId, (err) => {
     if (err) {
       client.res.statusCode = 403;
-      callback(err.message);
+      callback(err);
       return;
     }
 

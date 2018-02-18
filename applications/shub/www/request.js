@@ -1,3 +1,3 @@
 (client, callback) => {
-  callback(client.path);
+  callback('request');
 }

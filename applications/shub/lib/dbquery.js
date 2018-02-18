@@ -10,12 +10,7 @@ api.db.mysql.query = function(options, callback) {
   } else if (method === 'insert into') {
     const metadata = options.metadata ?
       `(${options.metadata.join(',')})` : '';
-
-    options.values = options.values.map(item => {
-      if (!item) return `${item}`;
-      else return item;
-    });
-
+    options.values = options.values.map(item => (item || `${item}`));
     const values = options.values.join(',');
     query.sql = `${method} ${table} ${metadata} values (${values})`;
 

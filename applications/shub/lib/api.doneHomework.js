@@ -6,12 +6,12 @@ api.doneHomework = function(homeworkId, sessionId, callback) {
     }
 
     if (!classId) {
-      callback(new Error('Not authorized'));
+      callback('Not authorized');
       return;
     }
 
     const options = {
-      method: 'INSERT INTO',
+      method: 'insert into',
       table: 'done_homework',
       values: [
         null,

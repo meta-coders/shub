@@ -5,7 +5,7 @@
   api.getPinnedMessages(sessionId, (err, data) => {
     if (err) {
       client.res.statusCode = 403;
-      callback(err.message);
+      callback(err);
       return;
     }
 
