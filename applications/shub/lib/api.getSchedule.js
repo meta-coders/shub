@@ -6,7 +6,7 @@ api.getSchedule = function(data, callback) {
     }
 
     if (!classId) {
-      callback(new Error('Not Authorized'));
+      callback('Not Authorized');
       return;
     }
 

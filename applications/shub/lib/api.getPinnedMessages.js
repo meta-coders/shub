@@ -6,7 +6,7 @@ api.getPinnedMessages = function(sessionId, callback) {
     }
 
     if (!classId) {
-      callback(new Error('Not authorized'));
+      callback('Not authorized');
       return;
     }
 
@@ -25,9 +25,8 @@ api.getPinnedMessages = function(sessionId, callback) {
 
       const pinned = result.map(item => (
         Object.assign(
-          {},
-          item,
-          { date: item.date.toISOString().split('T')[0] }
+          { date: item.date.toISOString().split('T')[0] },
+          item
         )
       ));
 

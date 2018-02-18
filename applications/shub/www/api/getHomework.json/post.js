@@ -8,7 +8,7 @@
     api.doneHomework(homeworkId, sessionId, (err, data) => {
       if (err) {
         client.res.statusCode = 403;
-        callback(err.message);
+        callback(err);
         return;
       }
 
@@ -18,7 +18,7 @@
     api.undoneHomework(homeworkId, sessionId, (err, data) => {
       if (err) {
         client.res.statusCode = 403;
-        callback(err.message);
+        callback(err);
         return;
       }
 

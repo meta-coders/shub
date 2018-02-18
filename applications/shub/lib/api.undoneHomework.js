@@ -6,7 +6,7 @@ api.undoneHomework = function(homeworkId, sessionId, callback) {
     }
 
     if (!classId) {
-      callback(new Error('Not authorized'));
+      callback('Not authorized');
       return;
     }
 
