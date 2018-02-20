@@ -1,5 +1,5 @@
-api.getSchedule = function(data, callback) {
-  api.checkAvailability(data.sessionId, (err, classId) => {
+api.getSchedule = function(sessionId, callback) {
+  api.checkAvailability(sessionId, (err, classId) => {
     if (err) {
       application.log.error(err);
       return;
@@ -20,7 +20,7 @@ api.getSchedule = function(data, callback) {
         'schedule.cabinet',
         'teachers.name AS teacher_name'
       ],
-      join: 'LEFT JOIN teachers ON teachers.id=schedule.teacher_id',
+      join: 'left join teachers ON teachers.id=schedule.teacher_id',
       filter: `class_id = ${classId}`
     };
 
