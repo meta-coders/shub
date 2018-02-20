@@ -8,8 +8,8 @@ api.getHomework = function(classId, sessionId, callback) {
       'lessons.date as date',
       'schedule.subject as subject'
     ],
-    join: 'left join lessons on homework.lesson_id = lessons.id ' +
-      'left join schedule on lessons.schedule_id = schedule.id ',
+    join: 'left join lessons on homework.lesson_id = lessons.id \
+      left join schedule on lessons.schedule_id = schedule.id ',
     filter: `homework.class_id = ${classId}`,
   };
 
@@ -21,11 +21,11 @@ api.getHomework = function(classId, sessionId, callback) {
 
     const homework = result.map(item => (
       Object.assign(
+        item,
         {
           done: false,
           date: item.date.toISOString().split('T')[0]
-        },
-        item
+        }
       )
     ));
 

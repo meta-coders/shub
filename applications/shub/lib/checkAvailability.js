@@ -1,7 +1,12 @@
 api.checkAvailability = function(sessionId, callback) {
   const options = {
     method: 'select',
+    columns: [
+      'profile_id',
+      'role'
+    ],
     table: 'sessions',
+    join: 'join users on sessions.user_id = users.id',
     filter: `session_id = "${sessionId}"`
   };
 
@@ -11,15 +16,18 @@ api.checkAvailability = function(sessionId, callback) {
       return;
     }
 
-    const uid = result[0].user_id;
+    const pid = result[0].profile_id;
+    const table = result[0].role;
 
     const options = {
       method: 'select',
-      table: 'students',
-      filter: `id = (select profile_id from users where id = ${uid})`
+      table,
+      filter: `id = ${pid}`
     };
 
-    this.db.mysql.query(options, (err, result) =>
-      callback(err, result[0].class_id));
+    this.db.mysql.query(options, (err, result) => {
+      if (table === 'students') callback(err, result[0].class_id);
+      else callback(err, result[0].id);
+    });
   });
 };

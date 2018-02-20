@@ -25,8 +25,8 @@ api.getPinnedMessages = function(sessionId, callback) {
 
       const pinned = result.map(item => (
         Object.assign(
-          { date: item.date.toISOString().split('T')[0] },
-          item
+          item,
+          { date: item.date.toISOString().split('T')[0] }
         )
       ));
 

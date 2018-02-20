@@ -4,6 +4,12 @@
   const sessionId = data.sessionId;
   const done = data.done;
 
+  if (!sessionId) {
+    client.res.statusCode = 400;
+    callback();
+    return;
+  }
+
   if (done) {
     api.doneHomework(homeworkId, sessionId, (err, data) => {
       if (err) {

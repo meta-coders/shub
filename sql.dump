@@ -1,13 +1,13 @@
--- MySQL dump 10.15  Distrib 10.0.33-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.2.12-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: shub
 -- ------------------------------------------------------
--- Server version	10.0.33-MariaDB-0ubuntu0.16.04.1
+-- Server version	10.2.12-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -35,7 +35,7 @@ CREATE TABLE `classes` (
 
 LOCK TABLES `classes` WRITE;
 /*!40000 ALTER TABLE `classes` DISABLE KEYS */;
-INSERT INTO `classes` VALUES (1,'11-А'),(55,'11-Б'),(56,'11-В'),(57,'undefined');
+INSERT INTO `classes` VALUES (1,'11-А'),(55,'11-Б'),(56,'11-В'),(57,'11-Г');
 /*!40000 ALTER TABLE `classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +55,7 @@ CREATE TABLE `done_homework` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `done_homework_ibfk_1` FOREIGN KEY (`homework_id`) REFERENCES `homework` (`id`),
   CONSTRAINT `done_homework_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,6 @@ CREATE TABLE `done_homework` (
 
 LOCK TABLES `done_homework` WRITE;
 /*!40000 ALTER TABLE `done_homework` DISABLE KEYS */;
-INSERT INTO `done_homework` VALUES (37,3,1),(38,4,1),(43,5,1),(44,6,1);
 /*!40000 ALTER TABLE `done_homework` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +103,7 @@ DROP TABLE IF EXISTS `homework`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `homework` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `lesson_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `description` text NOT NULL,
@@ -113,7 +112,7 @@ CREATE TABLE `homework` (
   KEY `class_id` (`class_id`),
   CONSTRAINT `homework_ibfk_1` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`),
   CONSTRAINT `homework_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +121,7 @@ CREATE TABLE `homework` (
 
 LOCK TABLES `homework` WRITE;
 /*!40000 ALTER TABLE `homework` DISABLE KEYS */;
-INSERT INTO `homework` VALUES (1,1,1,'Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante.'),(2,5,1,'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.'),(3,9,1,'In congue. Etiam justo.'),(4,13,1,'Nulla tellus. In sagittis dui vel nisl.'),(5,17,1,'Quisque ut erat.'),(6,21,1,'In congue. Etiam justo.'),(7,25,1,'Aenean sit amet justo.'),(8,29,1,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus.'),(9,33,1,'Donec quis orci eget orci vehicula condimentum.'),(10,37,1,'Morbi vel lectus in quam fringilla rhoncus.');
+INSERT INTO `homework` VALUES (2,5,1,'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.'),(3,9,1,'Vivamus vel nulla eget eros elementum pellentesque.'),(4,13,1,'In hac habitasse platea dictumst.'),(5,17,1,'Hello world'),(6,21,1,'Duis at velit eu est congue elementum.'),(7,25,1,'Donec posuere metus vitae ipsum.'),(8,29,1,'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.'),(9,33,1,'Ut tellus.'),(10,37,1,'Duis aliquam convallis nunc.'),(11,41,1,'Maecenas pulvinar lobortis est.'),(43,1,1,'Lol kek chebureck'),(44,36,1,'Nu chto tam?'),(45,36,57,'Nu chto tam?');
 /*!40000 ALTER TABLE `homework` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +149,7 @@ CREATE TABLE `lessons` (
 
 LOCK TABLES `lessons` WRITE;
 /*!40000 ALTER TABLE `lessons` DISABLE KEYS */;
-INSERT INTO `lessons` VALUES (1,1,'2018-02-08','lesson'),(2,2,'2018-02-05','lesson'),(3,3,'2018-02-06','exam'),(4,4,'2018-02-07','exam'),(5,5,'2018-02-09','exam'),(6,6,'2018-02-07','exam'),(7,7,'2018-02-06','lesson'),(8,8,'2018-02-09','exam'),(9,9,'2018-02-07','exam'),(10,10,'2018-02-06','exam'),(11,11,'2018-02-08','exam'),(12,12,'2018-02-05','lesson'),(13,13,'2018-02-07','exam'),(14,14,'2018-02-06','lesson'),(15,15,'2018-02-08','lesson'),(16,16,'2018-02-07','lesson'),(17,17,'2018-02-07','lesson'),(18,18,'2018-02-06','lesson'),(19,19,'2018-02-06','exam'),(20,20,'2018-02-08','exam'),(21,21,'2018-02-07','lesson'),(22,22,'2018-02-05','lesson'),(23,23,'2018-02-06','exam'),(24,24,'2018-02-05','lesson'),(25,25,'2018-02-09','lesson'),(26,26,'2018-02-05','exam'),(27,27,'2018-02-07','exam'),(28,28,'2018-02-07','exam'),(29,29,'2018-02-08','lesson'),(30,30,'2018-02-09','lesson'),(31,31,'2018-02-05','exam'),(32,32,'2018-02-06','exam'),(33,33,'2018-02-09','lesson'),(34,34,'2018-02-07','exam'),(35,35,'2018-02-05','exam'),(36,36,'2018-02-09','exam'),(37,37,'2018-02-07','lesson'),(38,38,'2018-02-09','lesson'),(39,39,'2018-02-08','lesson'),(40,40,'2018-02-07','exam'),(41,41,'2018-02-07','lesson'),(42,42,'2018-02-06','lesson');
+INSERT INTO `lessons` VALUES (1,1,'2018-02-19','lesson'),(2,2,'2018-02-19','lesson'),(3,3,'2018-02-19','exam'),(4,4,'2018-02-19','exam'),(5,5,'2018-02-19','exam'),(6,6,'2018-02-19','exam'),(7,7,'2018-02-19','lesson'),(8,8,'2018-02-20','exam'),(9,9,'2018-02-20','exam'),(10,10,'2018-02-20','exam'),(11,11,'2018-02-20','exam'),(12,12,'2018-02-20','lesson'),(13,13,'2018-02-20','exam'),(14,14,'2018-02-20','lesson'),(15,15,'2018-02-21','lesson'),(16,16,'2018-02-21','lesson'),(17,17,'2018-02-21','lesson'),(18,18,'2018-02-21','lesson'),(19,19,'2018-02-21','exam'),(20,20,'2018-02-21','exam'),(21,21,'2018-02-21','lesson'),(22,22,'2018-02-22','lesson'),(23,23,'2018-02-22','exam'),(24,24,'2018-02-22','lesson'),(25,25,'2018-02-22','lesson'),(26,26,'2018-02-22','exam'),(27,27,'2018-02-22','exam'),(28,28,'2018-02-22','exam'),(29,29,'2018-02-23','lesson'),(30,30,'2018-02-23','lesson'),(31,31,'2018-02-23','exam'),(32,32,'2018-02-23','exam'),(33,33,'2018-02-23','lesson'),(34,34,'2018-02-23','exam'),(35,35,'2018-02-23','exam'),(36,36,'2018-02-24','exam'),(37,37,'2018-02-24','lesson'),(38,38,'2018-02-24','lesson'),(39,39,'2018-02-24','lesson'),(40,40,'2018-02-24','exam'),(41,41,'2018-02-24','lesson'),(42,42,'2018-02-24','lesson');
 /*!40000 ALTER TABLE `lessons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,7 +228,7 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +237,6 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES (8,1,'0104642a72f72d14c1dd36b14ddb4b1b'),(20,1,'20293513b5acdeb0ccfffe48e3bc958a'),(27,1,'9563d1216744158fea7c978bc2a96940'),(28,1,'2ec4b081da9cee700f826c9ef4ba9b77'),(29,1,'fdaa3e326e2ad42d2b7966cd240a7c5c');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +330,7 @@ CREATE TABLE `users` (
   `role` varchar(255) NOT NULL,
   `profile_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -341,7 +339,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'dima','3b7f6ca1dd7d4a2f02bec407cb35d28b','students',3),(2,'front','8dedb8f8bab3f048fbb548fbdcc796c0','students',6),(111,'Петя','5e5545d38a68148a2d5bd5ec9a89e327','students',1),(112,'Діма','213ee683360d88249109c2f92789dbc3','students',2),(113,'Коля','8e4947690532bc44a8e41e9fb365b76a','students',3),(114,'Настя','166a50c910e390d922db4696e4c7747b','students',4),(115,'Валера','9fd9280a7aa3578c8e853745a5fcc18a','students',5),(116,'Петровіч','27e062bf3df59edebb5db9f89952c8b3','students',6),(117,'Рома','72e8744fc2faa17a83dec9bed06b8b65','students',7),(118,'Ілля','8aa7fb36a4efbbf019332b4677b528cf','students',8),(119,'Костік','7c8cd5da17441ff04bf445736964dd16','students',9),(120,'Максім','2c62e6068c765179e1aed9bc2bfd4689','students',10),(121,'Валя','9cf695ac37ef238e62f6ee874b4b3968','students',11),(122,'Валентін','7e941d9a3237b1770effdcb05a0aa2a5','students',12),(123,'Міша','b32d56347d79af0164e17f8b2b4ff4d0','students',13),(124,'Вова','165f0cca0654c0f643fc6f06ae91d353','students',14),(125,'Крістіна','1aab63425143cdbee13e839afc02849f','students',15),(126,'Маша','051bef2eaac7c580b990da8f79459263','students',16),(127,'Микита','717edde484efc01f99e58d67181717f9','students',17),(128,'Федя','4b8d3feaf05b8735fc91f0a3df478ccf','students',18),(129,'Петя','5e5545d38a68148a2d5bd5ec9a89e327','students',1),(130,'Діма','213ee683360d88249109c2f92789dbc3','students',2),(131,'Коля','8e4947690532bc44a8e41e9fb365b76a','students',3),(132,'Настя','166a50c910e390d922db4696e4c7747b','students',4),(133,'Валера','9fd9280a7aa3578c8e853745a5fcc18a','students',5),(134,'Петровіч','27e062bf3df59edebb5db9f89952c8b3','students',6),(135,'Рома','72e8744fc2faa17a83dec9bed06b8b65','students',7),(136,'Ілля','8aa7fb36a4efbbf019332b4677b528cf','students',8),(137,'Костік','7c8cd5da17441ff04bf445736964dd16','students',9),(138,'Максім','2c62e6068c765179e1aed9bc2bfd4689','students',10),(139,'Валя','9cf695ac37ef238e62f6ee874b4b3968','students',11),(140,'Валентін','7e941d9a3237b1770effdcb05a0aa2a5','students',12),(141,'Міша','b32d56347d79af0164e17f8b2b4ff4d0','students',13),(142,'Вова','165f0cca0654c0f643fc6f06ae91d353','students',14),(143,'Крістіна','1aab63425143cdbee13e839afc02849f','students',15),(144,'Маша','051bef2eaac7c580b990da8f79459263','students',16),(145,'Микита','717edde484efc01f99e58d67181717f9','students',17),(146,'Федя','4b8d3feaf05b8735fc91f0a3df478ccf','students',18);
+INSERT INTO `users` VALUES (1,'dima','3b7f6ca1dd7d4a2f02bec407cb35d28b','students',3),(2,'front','8dedb8f8bab3f048fbb548fbdcc796c0','students',6),(111,'Петя','5e5545d38a68148a2d5bd5ec9a89e327','students',1),(112,'Діма','213ee683360d88249109c2f92789dbc3','students',2),(113,'Коля','8e4947690532bc44a8e41e9fb365b76a','students',3),(114,'Настя','166a50c910e390d922db4696e4c7747b','students',4),(115,'Валера','9fd9280a7aa3578c8e853745a5fcc18a','students',5),(116,'Петровіч','27e062bf3df59edebb5db9f89952c8b3','students',6),(117,'Рома','72e8744fc2faa17a83dec9bed06b8b65','students',7),(118,'Ілля','8aa7fb36a4efbbf019332b4677b528cf','students',8),(119,'Костік','7c8cd5da17441ff04bf445736964dd16','students',9),(120,'Максім','2c62e6068c765179e1aed9bc2bfd4689','students',10),(121,'Валя','9cf695ac37ef238e62f6ee874b4b3968','students',11),(122,'Валентін','7e941d9a3237b1770effdcb05a0aa2a5','students',12),(123,'Міша','b32d56347d79af0164e17f8b2b4ff4d0','students',13),(124,'Вова','165f0cca0654c0f643fc6f06ae91d353','students',14),(125,'Крістіна','1aab63425143cdbee13e839afc02849f','students',15),(126,'Маша','051bef2eaac7c580b990da8f79459263','students',16),(127,'Микита','717edde484efc01f99e58d67181717f9','students',17),(128,'Федя','4b8d3feaf05b8735fc91f0a3df478ccf','students',18),(129,'Петя','5e5545d38a68148a2d5bd5ec9a89e327','students',1),(130,'Діма','213ee683360d88249109c2f92789dbc3','students',2),(131,'Коля','8e4947690532bc44a8e41e9fb365b76a','students',3),(132,'Настя','166a50c910e390d922db4696e4c7747b','students',4),(133,'Валера','9fd9280a7aa3578c8e853745a5fcc18a','students',5),(134,'Петровіч','27e062bf3df59edebb5db9f89952c8b3','students',6),(135,'Рома','72e8744fc2faa17a83dec9bed06b8b65','students',7),(136,'Ілля','8aa7fb36a4efbbf019332b4677b528cf','students',8),(137,'Костік','7c8cd5da17441ff04bf445736964dd16','students',9),(138,'Максім','2c62e6068c765179e1aed9bc2bfd4689','students',10),(139,'Валя','9cf695ac37ef238e62f6ee874b4b3968','students',11),(140,'Валентін','7e941d9a3237b1770effdcb05a0aa2a5','students',12),(141,'Міша','b32d56347d79af0164e17f8b2b4ff4d0','students',13),(142,'Вова','165f0cca0654c0f643fc6f06ae91d353','students',14),(143,'Крістіна','1aab63425143cdbee13e839afc02849f','students',15),(144,'Маша','051bef2eaac7c580b990da8f79459263','students',16),(145,'Микита','717edde484efc01f99e58d67181717f9','students',17),(146,'Федя','4b8d3feaf05b8735fc91f0a3df478ccf','students',18),(147,'Петровіч О.В.','c63f6d956a6ca2c7e58732d25c903ee7','teachers',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -354,4 +352,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-11 17:59:17
+-- Dump completed on 2018-02-20 23:19:25

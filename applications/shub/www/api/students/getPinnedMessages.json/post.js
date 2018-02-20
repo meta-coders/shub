@@ -1,6 +1,14 @@
 (client, callback) => {
   const data = JSON.parse(client.data);
-  api.getSchedule(data, (err, data) => {
+  const sessionId = data.sessionId;
+
+  if (!sessionId) {
+    client.res.statusCode = 400;
+    callback();
+    return;
+  }
+
+  api.getPinnedMessages(sessionId, (err, data) => {
     if (err) {
       client.res.statusCode = 403;
       callback(err);

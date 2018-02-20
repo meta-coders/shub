@@ -30,6 +30,6 @@ api.db.mysql.query = function(options, callback) {
     query.sql = `${method} ${table} set ${set} ${filter}`;
 
   }
-
+  console.log(query);
   this.connection.query(query.sql, callback);
 };
