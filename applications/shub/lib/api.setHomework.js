@@ -10,42 +10,37 @@ api.setHomework = function(sessionId, homework, callback) {
       return;
     }
 
-    const classes = homework.classes;
-    const parallel = [[]];
-
-    classes.forEach((classObj) => {
+    const processClasses = (item, cb) => {
       const options = {
         method: 'insert into',
         table: 'homework',
         values: [
           null,
           `(select distinct lessons.id from lessons join \
-          schedule on lessons.schedule_id = schedule.id \
-          where date = "${homework.date}" and teacher_id = ${teacherId})`,
-          classObj.id,
+            schedule on lessons.schedule_id = schedule.id \
+            where date = "${homework.date}" and teacher_id = ${teacherId})`,
+          item.id,
           `"${homework.description}"`
         ]
       };
 
-      parallel[0].push((data, cb) =>
-        api.db.mysql.query(options, (err) => {
+      api.db.mysql.query(
+        options,
+        (err) => {
           if (err) {
             application.log.error(err);
             return;
           }
 
           cb(null);
-        })
+        }
       );
-    });
+    };
 
-    api.metasync(parallel)({}, (err) => {
-      if (err) {
-        application.log.error(err);
-        return;
-      }
-
-      callback();
-    });
+    api.metasync.each(
+      homework.classes,
+      processClasses,
+      () => callback()
+    );
   });
 };

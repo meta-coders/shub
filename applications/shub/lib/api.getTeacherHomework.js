@@ -14,10 +14,10 @@ api.getTeacherHomework = function(sessionId, callback) {
       method: 'select',
       table: 'homework',
       columns: [
+        'homework.id',
         'lessons.date as date',
         'homework.description',
         'classes.name as class',
-        'classes.id as classId'
       ],
       join: 'join lessons on homework.lesson_id = lessons.id join \
        classes on homework.class_id = classes.id join schedule on \

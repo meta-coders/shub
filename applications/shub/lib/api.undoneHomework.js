@@ -11,7 +11,7 @@ api.undoneHomework = function(homeworkId, sessionId, callback) {
     }
 
     const options = {
-      method: (homeworkId) ? 'DELETE' : 'SELECT',
+      method: (homeworkId) ? 'delete' : 'select',
       columns: (homeworkId) ? null : ['*'],
       table: 'done_homework',
       filter: (homeworkId) ? `homework_id = ${homeworkId}` : null
