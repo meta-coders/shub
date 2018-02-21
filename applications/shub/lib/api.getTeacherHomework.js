@@ -53,7 +53,7 @@ api.getTeacherHomework = function(sessionId, callback) {
           return;
         }
 
-        callback({ classes, homework });
+        callback(null, { classes, homework });
       });
     });
   });
