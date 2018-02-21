@@ -32,8 +32,8 @@ api.getHomework = function(classId, sessionId, callback) {
     const options = {
       method: 'select',
       table: 'done_homework',
-      filter: 'user_id = ' +
-      `(select user_id from sessions where session_id = "${sessionId}")`,
+      filter: `user_id = (select user_id from \
+        sessions where session_id = "${sessionId}")`,
     };
 
     api.db.mysql.query(options, (err, result) => {
@@ -42,12 +42,17 @@ api.getHomework = function(classId, sessionId, callback) {
         return;
       }
 
-      homework.forEach((item) => {
+      const processHomework = (item, cb) => {
         const has = result.some(el => el.homework_id === item.id);
         if (has) item.done = true;
-      });
+        cb(null);
+      };
 
-      callback(null, homework);
+      api.metasync.each(
+        homework,
+        processHomework,
+        () => callback(null, homework)
+      );
     });
   });
 };
