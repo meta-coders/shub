@@ -42,17 +42,14 @@ api.getHomework = function(classId, sessionId, callback) {
         return;
       }
 
-      const processHomework = (item, cb) => {
+      const processHomework = (item) => {
         const has = result.some(el => el.homework_id === item.id);
         if (has) item.done = true;
-        cb(null);
       };
 
-      api.metasync.each(
-        homework,
-        processHomework,
-        () => callback(null, homework)
-      );
+      homework.forEach(processHomework);
+
+      callback(null, homework);
     });
   });
 };

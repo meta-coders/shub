@@ -15,7 +15,7 @@ api.deleteHomework = function(sessionId, homeworkId, callback) {
       return;
     }
 
-    const processTables = (table, cb) => {
+    const processTables = (table) => {
       const id = (table === 'homework') ? 'id' : 'homework_id';
       const options = {
         method: 'delete',
@@ -28,15 +28,11 @@ api.deleteHomework = function(sessionId, homeworkId, callback) {
           application.log.error(err);
           return;
         }
-
-        cb(null);
       });
     };
 
-    api.metasync.each(
-      ['done_homework', 'homework'],
-      processTables,
-      () => callback()
-    );
+    ['done_homework', 'homework'].forEach(processTables);
+
+    callback();
   });
 };
