@@ -51,6 +51,12 @@
       }
     );
   } else if (method === 'delete') {
+    if (!homework.id) {
+      client.statusCode = 400;
+      callback('Bad request');
+      return;
+    }
+
     api.deleteHomework(
       sessionId,
       homework.id,
